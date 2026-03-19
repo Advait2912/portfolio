@@ -19,11 +19,12 @@ export default function Hero() {
       <div className="hero-left" ref={leftRef}>
         <p className="hero-eyebrow fade-up">Portfolio · 2026</p>
         <h1 className="fade-up" style={{ transitionDelay: "0.1s" }}>
-          Aarushi Sharma
+          Aarushi Sharma<br />
+          <span className="hero-tagline-title">Business Services & Systems Designer</span>
         </h1>
         <p className="hero-tagline fade-up" style={{ transitionDelay: "0.2s" }}>
-          <i>Business Services & Systems Designer<br />
-          Service Design · Systems Thinking · Experience Design</i>
+          
+          <i>Service Design · Systems Thinking · Experience Design</i>
         </p>
         <p className="hero-philosophy fade-up" style={{ transitionDelay: "0.3s" }}>
           I design systems that transform complex human problems into structured experiences. My work sits at the intersection of research, strategy, and visual thinking.

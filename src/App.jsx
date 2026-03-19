@@ -23,7 +23,7 @@ export default function App() {
       <CaseStudy />
       <SideExplorations />
       <OverwhelmMode />
-      <Iteration />
+      {/* <Iteration /> */}
       <Contact />
     </div>
   )

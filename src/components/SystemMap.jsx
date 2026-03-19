@@ -8,8 +8,9 @@ const nodes = [
   { id: 5, label: "Impact", x: 0.62, y: 0.82 },
   { id: 6, label: "People", x: 0.78, y: 0.22 },
   { id: 7, label: "Strategy", x: 0.14, y: 0.62 },
+  {id: 8, label: "Overwhelm", x: 0.5, y: 0.5}
 ]
-const connections = [[1,2],[1,4],[2,3],[2,6],[3,5],[4,5],[7,4],[7,1]]
+const connections = [[1,2],[1,4],[2,3],[2,6],[3,5],[3,8],[4,5],[4,8],[6,8],[7,4],[7,1]]
 const NW = 110, NH = 38
 
 export default function SystemMap() {

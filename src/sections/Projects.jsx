@@ -62,7 +62,7 @@ export default function Projects() {
   return (
     <section id="projects" className="projects-section" ref={ref}>
       <div className="projects-header">
-        <h2 className="fade-up">System<br />Interventions</h2>
+        <h2 className="fade-up">Projects</h2>
         <p className="fade-up" style={{ transitionDelay: "0.1s" }}>Projects as nodes — hover to explore connections, click to go deeper</p>
       </div>
 

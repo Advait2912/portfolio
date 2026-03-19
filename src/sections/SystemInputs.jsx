@@ -1,12 +1,14 @@
 import { useRef, useEffect, useState } from "react"
 
 const influences = [
-  { label: "Psychology", x: "50%", y: "8%", desc: "Understanding emotional patterns helps design systems people actually use." },
-  { label: "Visual Design", x: "10%", y: "42%", desc: "Aesthetics aren't decoration — they shape how people understand and trust a system." },
-  { label: "Systems Thinking", x: "85%", y: "42%", desc: "Everything connects. Changing one part changes everything." },
+  { label: "Psychology", x: "50%", y: "8%", desc: "Understanding what people feel, even when they can’t explain it." },
+  { label: "Visual Communication", x: "10%", y: "42%", desc: "Making ideas clear, visual, and meaningful." },
+  { label: "Systems Thinking", x: "85%", y: "42%", desc: "Seeing the bigger picture behind how everything works." },
   { label: "Behavioural Science", x: "18%", y: "82%", desc: "People are irrational in predictable ways. Design for who they are, not who we wish they were." },
-  { label: "Service Design", x: "78%", y: "82%", desc: "Experiences are systems. Every touchpoint is part of a larger journey." },
-  { label: "Research", x: "50%", y: "72%", desc: "Assumptions are the enemy. Evidence is the foundation." },
+  { label: "Service Design", x: "78%", y: "82%", desc: "Bringing everything together into real-world experiences." },
+  { label: "Research", x: "50%", y: "72%", desc: "Sitting with the problem before trying to solve it." },
+  { label: "Pattern Recognition", x: "50%", y: "28%", desc: "Creative Finding connections across people, systems, and experiences." },
+  { label: "Emotional Insight", x: "10%", y: "10%", desc: "Noticing what people feel beneath the surface."}
 ]
 
 const CENTER = { x: "50%", y: "46%" }

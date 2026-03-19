@@ -17,13 +17,13 @@ export default function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero-left" ref={leftRef}>
-        <p className="hero-eyebrow fade-up">Portfolio · 2024</p>
+        <p className="hero-eyebrow fade-up">Portfolio · 2026</p>
         <h1 className="fade-up" style={{ transitionDelay: "0.1s" }}>
-          Aarushi<br /><em>Sharma</em>
+          Aarushi Sharma
         </h1>
         <p className="hero-tagline fade-up" style={{ transitionDelay: "0.2s" }}>
-          Business Services & Systems Designer<br />
-          Service Design · Systems Thinking · Experience Design
+          <i>Business Services & Systems Designer<br />
+          Service Design · Systems Thinking · Experience Design</i>
         </p>
         <p className="hero-philosophy fade-up" style={{ transitionDelay: "0.3s" }}>
           I design systems that transform complex human problems into structured experiences. My work sits at the intersection of research, strategy, and visual thinking.

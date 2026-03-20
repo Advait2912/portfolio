@@ -1,9 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState, useCallback } from "react"
+import { Document, Page, pdfjs } from "react-pdf"
+import "react-pdf/dist/Page/AnnotationLayer.css"
+import "react-pdf/dist/Page/TextLayer.css"
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString()
 
 const projects = [
   {
     id: "meta-counsel",
+    pdf: "/pdfs/KrateKart.pdf",   // e.g. "/pdfs/meta-counsel-process.pdf"
     title: "Meta Counsel Campaign",
     subtitle: "Service Design · Strategy",
     tags: ["Service Design", "Strategy"],
@@ -20,6 +29,7 @@ const projects = [
   },
   {
     id: "emotion-ai",
+    pdf: "",   // e.g. "/pdfs/emotion-ai-process.pdf"
     title: "Emotion AI App",
     subtitle: "Experience Design · AI",
     tags: ["Experience Design", "AI"],
@@ -36,6 +46,7 @@ const projects = [
   },
   {
     id: "sleep-system",
+    pdf: "",   // e.g. "/pdfs/sleep-system-process.pdf"
     title: "Sleep Experience System",
     subtitle: "Systems Thinking · Research",
     tags: ["Systems Thinking", "Research"],
@@ -56,6 +67,11 @@ export default function CaseStudyPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const project = projects.find(p => p.id === id)
+  const [numPages, setNumPages] = useState(null)
+  const [containerWidth, setContainerWidth] = useState(null)
+  const containerRef = useCallback(node => {
+    if (node) setContainerWidth(node.getBoundingClientRect().width)
+  }, [])
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
@@ -68,7 +84,7 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "lab(92.22% -13.94 -4.11)", paddingTop: "60px", position: "relative", zIndex: 2 }}>
+    <div style={{ minHeight: "100vh", paddingTop: "60px", position: "relative", zIndex: 2 }}>
       <div className="case-study">
 
         {/* LEFT */}
@@ -129,25 +145,45 @@ export default function CaseStudyPage() {
           </button>
         </div>
 
-        {/* RIGHT */}
-        <div className="case-right">
-          <p className="section-label">Process</p>
-          <h3 style={{ fontFamily: "var(--serif)", fontSize: 28, fontWeight: 400, fontStyle: "italic", marginTop: 12 }}>
-            The Thinking Behind It
-          </h3>
-
-          {project.process.map((step, i) => (
-            <div key={i} className="chaos-item" style={{ transform: `rotate(${[-1.5, 0.8, -0.5][i] || 0}deg)` }}>
-              <div className="sketch-area">{step.sketch}</div>
-              <p className="chaos-caption">{step.caption}</p>
-            </div>
-          ))}
-
-          {project.insight && (
-            <div className="chaos-item" style={{ background: "var(--indigo-light)", borderColor: "rgba(10,133,140,0.2)" }}>
-              <p style={{ fontSize: 14, lineHeight: 1.7, color: "var(--text)", fontWeight: 300 }}>
-                <em>"{project.insight}"</em>
-              </p>
+        {/* RIGHT — react-pdf, no browser chrome */}
+        <div className="case-right" ref={containerRef}>
+          {project.pdf ? (
+            <Document
+              file={project.pdf}
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              loading={
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", color: "var(--text-muted)", fontSize: 13, letterSpacing: ".06em" }}>
+                  Loading PDF...
+                </div>
+              }
+            >
+              {Array.from({ length: numPages || 0 }, (_, i) => (
+                <Page
+                  key={i + 1}
+                  pageNumber={i + 1}
+                  width={containerWidth || undefined}
+                  renderAnnotationLayer={false}
+                  renderTextLayer={false}
+                  canvasBackground="transparent"
+                  style={{ display: "block" }}
+                />
+              ))}
+            </Document>
+          ) : (
+            <div style={{
+              width: "100%",
+              height: "100%",
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "12px",
+              color: "var(--text-muted)",
+            }}>
+              <span style={{ fontSize: 32 }}>📄</span>
+              <p style={{ fontSize: 13, letterSpacing: ".06em", textTransform: "uppercase" }}>Process PDF coming soon</p>
+              <p style={{ fontSize: 12, opacity: 0.6 }}>Set a <code>pdf</code> path in this project's data</p>
             </div>
           )}
         </div>

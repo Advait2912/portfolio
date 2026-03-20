@@ -15,23 +15,33 @@ export default function ParticleBackground() {
         canvas.style('left', '0')
         canvas.style('z-index', '0')
         canvas.style('pointer-events', 'none')
-        for (let i = 0; i < 1000; i++) {
+        // dense count scaled to screen, capped at 1300
+        const count = Math.min(1300, Math.floor((p.windowWidth * p.windowHeight) / 1200))
+        for (let i = 0; i < count; i++) {
           particles.push({ x: p.random(p.width), y: p.random(p.height), vx: 0, vy: 0 })
         }
+        p.frameRate(50)
       }
 
       p.draw = () => {
         p.background(235, 248, 250, 18)
         const density = 0.002
+        const mx = p.mouseX
+        const my = p.mouseY
+
+        // batch stroke calls — set once outside loop per style
+        p.strokeWeight(1.2)
+
         for (let pt of particles) {
           const n = p.noise(pt.x * density, pt.y * density, t)
           let angle = n * p.TWO_PI * 2
-          const dx = p.mouseX - pt.x
-          const dy = p.mouseY - pt.y
-          const d = p.sqrt(dx * dx + dy * dy)
-          if (d < 300) {
-            const pull = p.map(d, 0, 300, 3.5, 0)
-            const swirl = p.map(d, 0, 300, 1.5, 0)
+          const dx = mx - pt.x
+          const dy = my - pt.y
+          const d = dx * dx + dy * dy  // skip sqrt, compare squared
+          if (d < 90000) {  // 300^2
+            const dist = p.sqrt(d)
+            const pull = p.map(dist, 0, 300, 3.5, 0)
+            const swirl = p.map(dist, 0, 300, 1.5, 0)
             angle += p.atan2(dy, dx) * pull
             angle += p.HALF_PI * swirl
           }
@@ -45,12 +55,12 @@ export default function ParticleBackground() {
           if (pt.x > p.width) pt.x = 0
           if (pt.y < 0) pt.y = p.height
           if (pt.y > p.height) pt.y = 0
-          p.stroke(200, 240, 245, 40)
-          p.strokeWeight(2)
-          p.line(pt.x, pt.y, pt.x - pt.vx * 0.8, pt.y - pt.vy * 0.8)
-          p.stroke(150, 210, 220, 90)
-          p.strokeWeight(0.6)
-          p.line(pt.x, pt.y, pt.x - pt.vx * 0.8, pt.y - pt.vy * 0.8)
+
+          // single line per particle instead of two
+          const tx = pt.x - pt.vx * 0.8
+          const ty = pt.y - pt.vy * 0.8
+          p.stroke(175, 225, 235, 60)
+          p.line(pt.x, pt.y, tx, ty)
         }
         t += 0.0025
       }

@@ -10,10 +10,12 @@ import SideExplorations from './sections/SideExplorations'
 import OverwhelmMode from './sections/OverwhelmMode'
 import Iteration from './sections/Iteration'
 import Contact from './sections/Contact'
+import ParticleBackground from './components/ParticleBackground'
 
 export default function App() {
   return (
     <div className="portfolio">
+      <ParticleBackground /> 
       <CustomCursor />
       <MiniMap />
       <Hero />

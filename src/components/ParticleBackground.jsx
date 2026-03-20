@@ -8,6 +8,16 @@ export default function ParticleBackground() {
       let particles = []
       let t = 0
 
+      const COUNT = 1500
+      let lastRespawn = 0
+
+      const spawnParticles = () => {
+        particles = []
+        for (let i = 0; i < COUNT; i++) {
+          particles.push({ x: p.random(p.width), y: p.random(p.height), vx: p.random(-1, 1), vy: p.random(-1, 1) })
+        }
+      }
+
       p.setup = () => {
         const canvas = p.createCanvas(p.windowWidth, p.windowHeight)
         canvas.style('position', 'fixed')
@@ -15,15 +25,18 @@ export default function ParticleBackground() {
         canvas.style('left', '0')
         canvas.style('z-index', '0')
         canvas.style('pointer-events', 'none')
-        // dense count scaled to screen, capped at 1300
-        const count = 1500
-        for (let i = 0; i < count; i++) {
-          particles.push({ x: p.random(p.width), y: p.random(p.height), vx: 0, vy: 0 })
-        }
+        spawnParticles()
+        lastRespawn = p.millis()
         p.frameRate(50)
       }
 
       p.draw = () => {
+        // respawn all particles every 30 seconds
+        if (p.millis() - lastRespawn > 30000) {
+          spawnParticles()
+          lastRespawn = p.millis()
+        }
+
         p.background(235, 248, 250, 18)
         const density = 0.002
         const mx = p.mouseX

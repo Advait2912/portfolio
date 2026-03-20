@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react"
 
 const steps = [
-  { name: "Observe", desc: "Immerse in context. Watch how people actually behave, not how they say they do." },
-  { name: "Understand", desc: "Synthesise patterns. Find the hidden structures beneath surface-level problems." },
-  { name: "Map", desc: "Visualise the system. Make invisible relationships visible and navigable." },
-  { name: "Design", desc: "Intervene with intention. Create solutions that work within existing systems." },
-  { name: "Improve", desc: "Iterate with evidence. Every project feeds the next cycle of learning." },
+  { name: "Observe", desc: "I start by slowing down and paying attention- what people do, what they say, and what they don’t.<br />Often, the most important things are the ones that go unnoticed. " },
+  { name: "Understand", desc: "I try to make sense of what’s really going on- people, context, emotions, and contradictions.<br /> It’s less about answers, more about asking better questions. " },
+  { name: "Map", desc: "I externalize the mess- connecting dots, patterns, and relationships to see the bigger picture. <br/ >Mapping helps me move from confusion to clarity. Visualise the system. Make invisible relationships visible and navigable." },
+  { name: "Design", desc: "I turn insights into something tangible- ideas, systems, or experiences that can exist in the real world. <br />The goal is not just to solve, but to make it feel right. " },
+  { name: "Improve", desc: "I test, reflect, and adapt.<br />What works stays, what doesn’t becomes learning- and the process continues." },
 ]
 
 const chaosNotes = [

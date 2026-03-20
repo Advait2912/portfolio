@@ -73,12 +73,12 @@ export default function SystemInputs() {
 
       <div style={{
         display: "grid",
-        gridTemplateColumns: "1fr 240px",
+        gridTemplateColumns: "1fr 320px",
         width: "100%",
         minHeight: "100%",
       }}>
 
-        {/* ── LEFT col ── */}
+        {/* ── LEFT col: About Me + Constellation ── */}
         <div style={{
           padding: "100px 60px 100px 6vw",
           display: "flex",
@@ -87,10 +87,10 @@ export default function SystemInputs() {
         }}>
 
           {/* About Me */}
-          <div className="fade-up" style={{ marginBottom: "48px" }}>
-           <h2 style={{
+          <div className="fade-up" style={{ marginBottom: "60px" }}>
+            <h2 style={{
               fontFamily: "var(--serif)", fontSize: "clamp(30px,4vw,52px)",
-              fontWeight: 400, lineHeight: 1.1, marginBottom: "12px",
+              fontWeight: 400, lineHeight: 1.1, marginBottom: "16px",
             }}>
               About Me
             </h2>
@@ -102,26 +102,25 @@ export default function SystemInputs() {
             </p>
           </div>
 
-          {/* What Shapes My Thinking — big h2 */}
-          <div className="fade-up" style={{ transitionDelay: "0.1s", marginBottom: "56px" }}>
-           
+          {/* What Shapes My Thinking */}
+          <div className="fade-up" style={{ transitionDelay: "0.1s", marginBottom: "40px" }}>
             <h2 style={{
               fontFamily: "var(--serif)", fontSize: "clamp(30px,4vw,52px)",
               fontWeight: 400, lineHeight: 1.1, marginBottom: "12px",
             }}>
               What Shapes My Thinking
             </h2>
-             <span style={{
+            <span style={{
               fontSize: "10px", letterSpacing: ".2em", textTransform: "uppercase",
               color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "12px",
               marginBottom: "14px",
             }}>
-               The disciplines that inform how I design
+              The disciplines that inform how I design
               <span style={{ flex: 1, height: "1px", background: "var(--border)", display: "inline-block" }} />
             </span>
           </div>
 
-          {/* Constellation — ref is here so ResizeObserver gets its actual size */}
+          {/* Constellation — same width as left col only */}
           <div
             ref={constellationRef}
             className="constellation fade-up"
@@ -154,6 +153,7 @@ export default function SystemInputs() {
                 top: CENTER.y,
                 opacity: centerOpacity(),
                 transition: "opacity 0.4s ease",
+                transform: "translate(-50%, -50%)",
               }}
               onMouseEnter={() => setHoveredCenter(true)}
               onMouseLeave={() => setHoveredCenter(false)}
@@ -204,23 +204,24 @@ export default function SystemInputs() {
             ))}
           </div>
 
-        </div>
+        </div>{/* end left col */}
 
-        {/* ── RIGHT col: photo full height with padding ── */}
+        {/* ── RIGHT col: photo spanning full section height ── */}
         <div style={{
-          borderLeft: "1px solid var(--border)",
-          background: "var(--bg)",
+          /*borderLeft: "1px solid var(--border)",*/
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection: "column",
-          gap: "10px",
-          padding: "40px 24px",
+          padding: "40px 28px",
+          position: "sticky",
+          top: 0,
+          alignSelf: "start",
+          height: "100vh",
         }}>
           <div style={{
             width: "100%",
-            flex: 1,
-            borderRadius: "12px",
+            aspectRatio: "3/4",
+            borderRadius: "16px",
             border: "1px solid var(--border)",
             background: "var(--white)",
             display: "flex",
@@ -232,8 +233,9 @@ export default function SystemInputs() {
             fontSize: "11px",
             letterSpacing: ".1em",
             textTransform: "uppercase",
+            overflow: "hidden",
           }}>
-            <span style={{ fontSize: "32px", opacity: 0.2 }}>◻</span>
+            <span style={{ fontSize: "40px", opacity: 0.15 }}>◻</span>
             Photo
           </div>
         </div>

@@ -16,7 +16,7 @@ export default function ParticleBackground() {
         canvas.style('z-index', '0')
         canvas.style('pointer-events', 'none')
         // dense count scaled to screen, capped at 1300
-        const count = Math.min(1300, Math.floor((p.windowWidth * p.windowHeight) / 1200))
+        const count = 1500
         for (let i = 0; i < count; i++) {
           particles.push({ x: p.random(p.width), y: p.random(p.height), vx: 0, vy: 0 })
         }
